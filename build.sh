@@ -44,11 +44,13 @@ mkdir -p "$CUSTOM"
 copy_with_deps() {
   local file="$1"
   if [ -f "$DLC_DIR/data/$file" ] && [ ! -f "$CUSTOM/$file" ]; then
+    echo "    $file"
     cp "$DLC_DIR/data/$file" "$CUSTOM/"
-    grep -Eo "^include:[a-zA-Z0-9_-]+" "$DLC_DIR/data/$file" | cut -d':' -f2 | while read -r dep; do
+    local dep
+    while read -r dep; do
       [ -n "$dep" ] || continue
       copy_with_deps "$dep"
-    done
+    done < <(grep -Eo "^include:[a-zA-Z0-9_-]+" "$DLC_DIR/data/$file" | cut -d':' -f2 || true)
   elif [ ! -f "$DLC_DIR/data/$file" ]; then
     echo "Нет категории в domain-list-community: $file" >&2
     exit 1
