@@ -1,0 +1,47 @@
+name: Build geo files
+
+on:
+  schedule:
+    - cron: "0 0 * * 1"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "categories.txt"
+      - "fold-into-category-ru.txt"
+      - "extra/**"
+      - "build.sh"
+      - ".github/workflows/build.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "stable"
+
+      - name: Build
+        run: |
+          chmod +x build.sh
+          ./build.sh
+
+      - name: Publish release latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          {
+            echo "Компактные geosite.dat / geoip.dat для Happ."
+            echo
+            echo "- geosite: российские категории + GitHub и extra/"
+            echo "- geoip: ru + private"
+            echo
+            echo "Сборка: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          } > release.md
+          gh release delete latest --cleanup-tag -y || true
+          gh release create latest dist/geosite.dat dist/geoip.dat -F release.md -t "geo-ru-plus"

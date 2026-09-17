@@ -1,0 +1,6 @@
+# Эти теги дополнительно вшиваются в category-ru.
+# В Happ у вас уже стоит geosite:category-ru в Direct —
+# после смены URL они пойдут мимо VPN без ручного добавления тегов.
+
+github
+custom

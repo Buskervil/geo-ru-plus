@@ -1,0 +1,34 @@
+# Теги из v2fly/domain-list-community.
+# Имя = имя файла в data/, в Happ это geosite:<имя>
+
+vk
+kinopoisk
+aviasales
+drweb
+wildberries
+rutube
+ozon
+wink
+2gis
+kaspersky
+ok
+yandex
+okko
+avito
+mosmetro
+dzen
+mailru
+mailru-group
+category-travel-ru
+x5
+category-gov-ru
+category-entertainment-ru
+category-retail-ru
+category-medicine-ru
+category-media-ru
+category-ecommerce-ru
+category-ru
+category-bank-ru
+
+# Иностранные сервисы, которые тоже идут напрямую
+github

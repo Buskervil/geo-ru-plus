@@ -1,0 +1,9 @@
+# Свои домены. Имя файла = тег geosite:custom
+# Пустые строки и комментарии игнорируются.
+# Без префикса — домен и все поддомены.
+# full:example.com — только точное имя.
+# keyword:foo — подстрока, лучше не использовать.
+
+# gitlab.com
+# domain:stackoverflow.com
+# full:npmjs.com
